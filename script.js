@@ -3,11 +3,13 @@ document.addEventListener("DOMContentLoaded", () => {
   let divMessage = document.getElementsByClassName("winningMessage")[0];
   let message = document.getElementById("msgWin");
   const btnReset = document.getElementById("reset_button");
+  const plusOneP1 = document.getElementsByClassName("plusOneP1")[0];
+  const plusOneP2 = document.getElementsByClassName("plusOneP2")[0];
 
-  let placarP1 = document.getElementById('player1_score');
-  placarP1.textContent = getItem('p1_score') ?? 0;
-  let placarP2 = document.getElementById('player2_score');
-  placarP2.textContent = getItem('p2_score') ?? 0;
+  let placarP1 = document.getElementById("player1_score");
+  placarP1.textContent = getItem("p1_score") ?? 0;
+  let placarP2 = document.getElementById("player2_score");
+  placarP2.textContent = getItem("p2_score") ?? 0;
 
   let playerNames = document.querySelectorAll(".player_name");
 
@@ -99,14 +101,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function endGame(player, type) {
     restarMatch();
-    if(type == "win" && player === p1Name) {
-      updateLocalStorage('p1_score', Number(getItem('p1_score'))+1 ?? 1);
-      placarP1.textContent = getItem('p1_score');
-    }
-    else {
-      updateLocalStorage('p2_score', Number(getItem('p2_score'))+1 ?? 1);
-      placarP2.textContent = getItem('p2_score');
-
+    if (type == "win" && player === p1Name) {
+      updateLocalStorage("p1_score", Number(getItem("p1_score")) + 1 ?? 1);
+      placarP1.textContent = getItem("p1_score");
+      plusOneP1.style.opacity = 1;
+      setTimeout(() => {
+        plusOneP1.style.opacity = 0;
+      }, 2000);
+    } else {
+      updateLocalStorage("p2_score", Number(getItem("p2_score")) + 1 ?? 1);
+      placarP2.textContent = getItem("p2_score");
+      plusOneP2.style.opacity = 1;
+      setTimeout(() => {
+        plusOneP2.style.opacity = 0;
+      }, 2500);
     }
     showMessage(player, type);
   }

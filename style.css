@@ -5,13 +5,13 @@
   font-size: 1rem;
   outline: none;
   border: none;
+  font-family: "ArcadeClassic", Arial, sans-serif;
 }
 
 body,
 html {
   height: 100vh;
   width: 100%;
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 .container {
@@ -56,7 +56,7 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 5rem;
+  font-size: 7rem;
   color: white;
 }
 
@@ -94,6 +94,7 @@ html {
   top: 5%;
   left: 2%;
   gap: 10px;
+  max-width: fit-content;
 }
 
 .player_configs {
@@ -102,20 +103,25 @@ html {
   gap: 20px;
 }
 
-.player_name,
-.player_marker {
-  border-bottom: 4px solid white;
-  background: none;
-  color: white;
-  font-weight: bold;
-}
+.player {
+  display: flex;
+  gap: 10px;
+  width: 200px;
+  input {
+    border-bottom: 4px solid white;
+    background: none;
+    color: white;
+    font-size: 1.5rem;
+  }
 
-.player_name {
-  max-width: 40%;
-}
-.player_marker {
-  text-align: center;
-  max-width: 20%;
+  .player_name {
+    max-width: 80%;
+  }
+
+  .player_marker {
+    text-align: center;
+    max-width: 20%;
+  }
 }
 
 .btn {
@@ -126,6 +132,10 @@ html {
   border-radius: 7px;
   cursor: pointer;
   background: none;
+  font-size: 1.5rem;
+  &:hover {
+    background-color: purple;
+  }
 }
 
 .winningMessage {
@@ -161,7 +171,7 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
 
   span {
     color: white;
@@ -170,5 +180,24 @@ html {
 
   #vs {
     font-size: 1.5rem;
+  }
+
+  .score {
+    position: relative;
+    padding: 0 10px;
+    .plusOneP1,
+    .plusOneP2 {
+      color: green;
+      position: absolute;
+      top: 1%;
+      transition: all 0.2s ease;
+      opacity: 0;
+    }
+    .plusOneP2 {
+      right: -25%;
+    }
+    .plusOneP1 {
+      left: -25%;
+    }
   }
 }
