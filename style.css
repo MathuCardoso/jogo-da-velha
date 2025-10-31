@@ -1,0 +1,174 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-size: 1rem;
+  outline: none;
+  border: none;
+}
+
+body,
+html {
+  height: 100vh;
+  width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+  height: 100vh;
+  width: 100%;
+  background: linear-gradient(
+    320deg,
+    rgb(0, 0, 0, 1),
+    rgba(82, 0, 112, 1),
+    rgb(0, 0, 0, 0.9)
+  );
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.board {
+  background: linear-gradient(
+    70deg,
+    rgba(255, 255, 255, 0.3),
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.2)
+  );
+  width: 40%;
+  height: 65%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  overflow: hidden;
+  border-radius: 10px;
+}
+
+.block {
+  width: 33.33%;
+  height: 33.33%;
+  background: none;
+  border: 5px solid black;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 5rem;
+  color: white;
+}
+
+.block.hover {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.block:nth-child(1),
+.block:nth-child(2),
+.block:nth-child(3) {
+  border-top: none;
+}
+.block:nth-child(1),
+.block:nth-child(4),
+.block:nth-child(7) {
+  border-left: none;
+}
+
+.block:nth-child(7),
+.block:nth-child(8),
+.block:nth-child(9) {
+  border-bottom: none;
+}
+
+.block:nth-child(3),
+.block:nth-child(6),
+.block:nth-child(9) {
+  border-right: none;
+}
+
+.configs {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 5%;
+  left: 2%;
+  gap: 10px;
+}
+
+.player_configs {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.player_name,
+.player_marker {
+  border-bottom: 4px solid white;
+  background: none;
+  color: white;
+  font-weight: bold;
+}
+
+.player_name {
+  max-width: 40%;
+}
+.player_marker {
+  text-align: center;
+  max-width: 20%;
+}
+
+.btn {
+  color: white;
+  border: 3px solid purple;
+  width: fit-content;
+  padding: 7px;
+  border-radius: 7px;
+  cursor: pointer;
+  background: none;
+}
+
+.winningMessage {
+  max-width: 50%;
+  padding: 20px;
+  height: 10%;
+  border-radius: 20px;
+  color: white;
+  position: absolute;
+  bottom: -10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: all 0.5s ease;
+
+  span {
+    font-size: 2rem;
+  }
+}
+
+.winningMessage.show {
+  opacity: 1;
+  bottom: 2%;
+}
+
+.placar {
+  border-bottom: 4px solid white;
+  border-radius: 5px;
+  width: 20%;
+  position: absolute;
+  top: 3%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+
+  span {
+    color: white;
+    font-size: 2.5rem;
+  }
+
+  #vs {
+    font-size: 1.5rem;
+  }
+}

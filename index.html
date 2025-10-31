@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Grandma game</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="placar">
+        <span id="player1_score"></span>
+        <span id="vs">X</span>
+        <span id="player2_score"></span>
+      </div>
+
+      <div class="winningMessage">
+        <span id="msgWin">Luis Venceu!</span>
+      </div>
+
+      <div class="configs">
+        <div class="player_configs">
+          <div class="player_1">
+            <input type="text" id="p1_name" class="player_name" />
+            <input
+              type="text"
+              id="p1_marker"
+              class="player_marker"
+              maxlength="1"
+            />
+          </div>
+          <div class="player_2">
+            <input type="text" id="p2_name" class="player_name" />
+            <input
+              type="text"
+              id="p2_marker"
+              class="player_marker"
+              maxlength="1"
+            />
+          </div>
+        </div>
+        <button class="btn" id="reset_button">RESET</button>
+      </div>
+
+      <div class="board">
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+      </div>
+    </div>
+  </body>
+  <script src="./script.js"></script>
+</html>
