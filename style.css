@@ -28,6 +28,7 @@ html {
   align-items: center;
   position: relative;
   overflow: hidden;
+  transition: all 0.4s ease;
 }
 
 .board {
@@ -151,6 +152,7 @@ html {
   align-items: center;
   opacity: 0;
   transition: all 0.5s ease;
+  z-index: 99;
 
   span {
     font-size: 2rem;
@@ -198,6 +200,46 @@ html {
     }
     .plusOneP1 {
       left: -25%;
+    }
+  }
+}
+
+.themes {
+  position: absolute;
+  top: 5%;
+  right: 3%;
+
+  select {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    padding: 7px;
+    border-radius: 5px;
+    cursor: pointer;
+
+    option {
+      color: black;
+    }
+  }
+}
+
+.startGame {
+  position: absolute;
+  bottom: 5%;
+  
+  button {
+    background: none;
+    color: white;
+    font-size: 2rem;
+    border: 2px solid white;
+    padding: 5px;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: white;
+      color: black;
     }
   }
 }

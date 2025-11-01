@@ -1,28 +1,31 @@
 document.addEventListener("DOMContentLoaded", () => {
   //VARIAVEIS//
-  let divMessage = document.getElementsByClassName("winningMessage")[0];
+  let divMessage = document.querySelector(".winningMessage");
   let message = document.getElementById("msgWin");
   const btnReset = document.getElementById("reset_button");
-  const plusOneP1 = document.getElementsByClassName("plusOneP1")[0];
-  const plusOneP2 = document.getElementsByClassName("plusOneP2")[0];
+  const plusOneP1 = document.querySelector(".plusOneP1");
+  const plusOneP2 = document.querySelector(".plusOneP2");
+  const themes = document.getElementById("themes");
+  const container = document.querySelector(".container");
+  container.style.background = localStorage.getItem("bg_theme");
 
   let placarP1 = document.getElementById("player1_score");
-  placarP1.textContent = getItem("p1_score") ?? 0;
+  placarP1.textContent = localStorage.getItem("p1_score") ?? 0;
   let placarP2 = document.getElementById("player2_score");
-  placarP2.textContent = getItem("p2_score") ?? 0;
+  placarP2.textContent = localStorage.getItem("p2_score") ?? 0;
 
   let playerNames = document.querySelectorAll(".player_name");
 
   let inpP1Name = document.getElementById("p1_name");
-  inpP1Name.value = getItem("p1_name") ?? "Player 1";
+  inpP1Name.value = localStorage.getItem("p1_name") ?? "Player 1";
   let inpP2Name = document.getElementById("p2_name");
-  inpP2Name.value = getItem("p2_name") ?? "Player 2";
+  inpP2Name.value = localStorage.getItem("p2_name") ?? "Player 2";
 
   let markers = document.querySelectorAll(".player_marker");
   let inpP1Marker = document.getElementById("p1_marker");
-  inpP1Marker.value = getItem("p1_marker") ?? "X";
+  inpP1Marker.value = localStorage.getItem("p1_marker") ?? "X";
   let inpP2Marker = document.getElementById("p2_marker");
-  inpP2Marker.value = getItem("p2_marker") ?? "O";
+  inpP2Marker.value = localStorage.getItem("p2_marker") ?? "O";
 
   let p1Name = inpP1Name.value;
   let p2Name = inpP2Name.value;
@@ -33,32 +36,67 @@ document.addEventListener("DOMContentLoaded", () => {
   const blocks = document.querySelectorAll(".block");
 
   let currentMarker = p1Marker;
+
   /////////////////////////////////////////////////////////////////////
 
-  //EVENT LISTENERS//
+  function updateLocalStorage(chave, valor) {
+    localStorage.setItem(chave, valor);
+  }
+
+  function resetConfigs() {
+    localStorage.clear();
+    inpP1Name.value = "Player 1";
+    inpP2Name.value = "Player 2";
+    p1Name = inpP1Name.value;
+    p2Name = inpP2Name.value;
+
+    inpP1Marker.value = "X";
+    inpP2Marker.value = "O";
+    p1Marker = inpP1Marker.value;
+    p2Marker = inpP2Marker.value;
+    currentMarker = p1Marker;
+
+    placarP1.textContent = "0";
+    placarP2.textContent = "0";
+  }
+
   markers.forEach((m) => {
     m.addEventListener("keyup", () => {
       inpP1Marker = document.getElementById("p1_marker");
       updateLocalStorage("p1_marker", inpP1Marker.value);
-      p1Marker = getItem("p1_marker");
+      p1Marker = localStorage.getItem("p1_marker");
       currentMarker = p1Marker;
       inpP2Marker = document.getElementById("p2_marker");
       updateLocalStorage("p2_marker", inpP2Marker.value);
-      p2Marker = getItem("p2_marker");
+      p2Marker = localStorage.getItem("p2_marker");
       currentMarker = p1Marker;
     });
   });
-
-  playerNames.forEach((p) => {
-    p.addEventListener("keyup", () => {
+  playerNames.forEach((n) => {
+    n.addEventListener("keyup", () => {
       inpP1Name = document.getElementById("p1_name");
       updateLocalStorage("p1_name", inpP1Name.value);
-      p1Name = getItem("p1_name");
+      p1Name = localStorage.getItem("p1_name");
       inpP2Name = document.getElementById("p2_name");
       updateLocalStorage("p2_name", inpP2Name.value);
       p2Name = inpP2Name.value;
     });
   });
+
+  themes.addEventListener("change", (e) => {
+    const color = e.target.value;
+    container.style.background = `linear-gradient(320deg,rgb(0, 0, 0, 1),${color},rgb(0, 0, 0, 0.9))`;
+    updateLocalStorage(
+      "bg_theme",
+      `linear-gradient(320deg,rgb(0, 0, 0, 1),${color},rgb(0, 0, 0, 0.9))`
+    );
+  });
+
+  btnReset.addEventListener("click", () => {
+    resetConfigs();
+  });
+
+  //EVENT LISTENERS//
 
   blocks.forEach((b) => {
     b.addEventListener("click", () => {
@@ -85,32 +123,26 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  btnReset.addEventListener("click", () => {
-    resetConfigs();
-  });
-
   ///////////////////////////////////////////////////////////////
-
-  function updateLocalStorage(chave, valor) {
-    localStorage.setItem(chave, valor);
-  }
-
-  function getItem(chave) {
-    return localStorage.getItem(chave);
-  }
 
   function endGame(player, type) {
     restarMatch();
     if (type == "win" && player === p1Name) {
-      updateLocalStorage("p1_score", Number(getItem("p1_score")) + 1 ?? 1);
-      placarP1.textContent = getItem("p1_score");
+      updateLocalStorage(
+        "p1_score",
+        Number(localStorage.getItem("p1_score")) + 1 ?? 1
+      );
+      placarP1.textContent = localStorage.getItem("p1_score");
       plusOneP1.style.opacity = 1;
       setTimeout(() => {
         plusOneP1.style.opacity = 0;
       }, 2000);
-    } else {
-      updateLocalStorage("p2_score", Number(getItem("p2_score")) + 1 ?? 1);
-      placarP2.textContent = getItem("p2_score");
+    } else if (type == "win" && player === p2Name) {
+      updateLocalStorage(
+        "p2_score",
+        Number(localStorage.getItem("p2_score")) + 1 ?? 1
+      );
+      placarP2.textContent = localStorage.getItem("p2_score");
       plusOneP2.style.opacity = 1;
       setTimeout(() => {
         plusOneP2.style.opacity = 0;
@@ -195,30 +227,14 @@ document.addEventListener("DOMContentLoaded", () => {
       ) {
         if (marker === p1Marker) {
           endGame(p1Name, "win");
+          return true;
         } else if (marker === p2Marker) {
           endGame(p2Name, "win");
+          return true;
         }
-      } else {
-        if (isDraw()) {
-          endGame(null, "draw");
-          return;
-        }
+      } else if (isDraw()) {
+        endGame(null, "draw");
       }
     }
-  }
-
-  function resetConfigs() {
-    localStorage.clear();
-    inpP1Name.value = "Player 1";
-    inpP2Name.value = "Player 2";
-
-    inpP1Marker.value = "X";
-    inpP2Marker.value = "O";
-    p1Marker = inpP1Marker.value;
-    p2Marker = inpP2Marker.value;
-    currentMarker = p1Marker;
-
-    placarP1.textContent = "0";
-    placarP2.textContent = "0";
   }
 });
