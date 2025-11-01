@@ -185,7 +185,7 @@ document.addEventListener("DOMContentLoaded", () => {
         divMessage.classList.remove("show");
       }, 2500);
     } else if (type == "draw") {
-      message.textContent = "DEU EMPATE!";
+      message.textContent = "VELHA!";
       divMessage.style.backgroundColor = "gray";
       divMessage.classList.add("show");
       setTimeout(() => {
